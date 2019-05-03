@@ -1,0 +1,23 @@
+package com.github.frunoman;
+
+public enum Format {
+    BRIEF("brief"),
+    LONG("long"),
+    PROCESS("process"),
+    RAW("raw"),
+    TAG("tag"),
+    THREAD("thread"),
+    THREADTIME("threadtime"),
+    TIME("time");
+
+    private final String value;
+
+    Format(String value){
+        this.value=value;
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
+    }
+}
