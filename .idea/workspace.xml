@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1660f56f-554f-467d-a0e9-1745a3bbf0d5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/frunoman/Line.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/github/frunoman/Logger$Logcat.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/frunoman/Logger$Logcat.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/frunoman/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/frunoman/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/frunoman/Priority.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/frunoman/Priority.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/frunoman/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/frunoman/Format.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/frunoman/Format.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/frunoman/Logger$Logcat.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/frunoman/Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/frunoman/Logger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/github/frunoman/Priority.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/github/frunoman/Priority.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/github/frunoman/BaseTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/github/frunoman/BaseTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,20 +26,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
+            <state relative-caret-position="347">
               <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/github/frunoman/BaseTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="420">
+              <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,13 +48,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/util/Date.java">
+        <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/text/DateFormat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="163" column="11" selection-start-line="163" selection-start-column="11" selection-end-line="163" selection-end-column="11" />
+            <state relative-caret-position="276">
+              <caret line="365" column="73" lean-forward="true" selection-start-line="365" selection-start-column="73" selection-end-line="365" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Line.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
               <folding>
-                <element signature="e#6390#6391#0" expanded="true" />
-                <element signature="e#6438#6439#0" expanded="true" />
+                <element signature="e#259#260#0" expanded="true" />
+                <element signature="e#297#298#0" expanded="true" />
+                <element signature="e#329#330#0" expanded="true" />
+                <element signature="e#356#357#0" expanded="true" />
+                <element signature="e#382#383#0" expanded="true" />
+                <element signature="e#417#418#0" expanded="true" />
+                <element signature="e#447#448#0" expanded="true" />
+                <element signature="e#484#485#0" expanded="true" />
+                <element signature="e#515#516#0" expanded="true" />
+                <element signature="e#565#566#0" expanded="true" />
+                <element signature="e#605#606#0" expanded="true" />
+                <element signature="e#635#636#0" expanded="true" />
+                <element signature="e#661#662#0" expanded="true" />
+                <element signature="e#699#700#0" expanded="true" />
+                <element signature="e#729#730#0" expanded="true" />
+                <element signature="e#767#768#0" expanded="true" />
+                <element signature="e#801#802#0" expanded="true" />
+                <element signature="e#855#856#0" expanded="true" />
+                <element signature="e#901#902#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,16 +89,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Logger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="140" selection-start-line="140" selection-end-line="140" />
+            <state relative-caret-position="460">
+              <caret line="78" column="5" lean-forward="true" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#824#832#0" expanded="true" />
-                <element signature="e#537#538#0" expanded="true" />
-                <element signature="e#575#576#0" expanded="true" />
-                <element signature="e#490#491#0" expanded="true" />
-                <element signature="e#532#533#0" expanded="true" />
                 <element signature="e#694#702#0" expanded="true" />
+                <element signature="e#1844#1850#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -110,8 +139,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Priority.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+            <state relative-caret-position="135">
+              <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -133,13 +162,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/Format.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/Priority.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/Logcat.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/Buffer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/Logger.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/github/frunoman/BaseTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/LogLine.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/Line.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/Priority.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/frunoman/Logger.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/github/frunoman/BaseTest.java" />
       </list>
     </option>
   </component>
@@ -218,11 +248,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="frunoman" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Logcat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Logcat" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -251,7 +276,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.BaseTest.dumpTest (1)">
+  <component name="RunManager" selected="TestNG.BaseTest.dumpTest">
     <configuration name="BaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Logcat" />
       <extension name="coverage">
@@ -270,6 +295,24 @@
       </method>
     </configuration>
     <configuration name="BaseTest.dumpTest (1)" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Logcat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.github.frunoman.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.github.frunoman" />
+      <option name="MAIN_CLASS_NAME" value="com.github.frunoman.BaseTest" />
+      <option name="METHOD_NAME" value="dumpTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BaseTest.dumpTest (2)" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Logcat" />
       <extension name="coverage">
         <pattern>
@@ -323,31 +366,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BaseTest.timeDumpTest (1)" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="Logcat" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.github.frunoman.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.github.frunoman" />
-      <option name="MAIN_CLASS_NAME" value="com.github.frunoman.BaseTest" />
-      <option name="METHOD_NAME" value="timeDumpTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.BaseTest.dumpTest (1)" />
         <item itemvalue="TestNG.BaseTest.dumpTest" />
+        <item itemvalue="TestNG.BaseTest.dumpTest (2)" />
+        <item itemvalue="TestNG.BaseTest.dumpTest (1)" />
         <item itemvalue="TestNG.BaseTest" />
         <item itemvalue="TestNG.BaseTest.tag" />
-        <item itemvalue="TestNG.BaseTest.timeDumpTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -383,43 +408,51 @@
       <option name="project" value="LOCAL" />
       <updated>1557138568076</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add buffer enum">
+      <created>1557147007585</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1557147007585</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 12h 15m 21s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 18m 36s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 12h 48m 43s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 18m 43s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 13h 00m 03s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 18m 52s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 13h 00m 07s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 19m 39s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 13h 00m 10s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 19m 48s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 13h 00m 14s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 19m 54s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 13h 00m 24s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 20m 08s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 13h 20m 18s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 21m 16s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 13h 28m 53s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 21m 24s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="BaseTest_dumpTest_(1) - 2019.05.06 at 13h 29m 04s.xml">
-      <configuration name="BaseTest.dumpTest (1)" configurationId="TestNG" />
+    <history-entry file="BaseTest_dumpTest - 2019.05.06 at 17h 21m 54s.xml">
+      <configuration name="BaseTest.dumpTest" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-2" width="1920" height="1082" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24332978" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -430,12 +463,12 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31896552" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39955604" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31896552" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39870688" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3275862" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3275862" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32852387" />
@@ -472,21 +505,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/github/frunoman/BaseTest.java</url>
-          <line>18</line>
+          <line>30</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Logger.java</url>
-          <line>57</line>
+          <line>48</line>
           <properties />
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Logger.java</url>
+          <line>162</line>
+          <properties />
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>m.group(0).trim()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>m.group(0)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>Process process = Runtime.getRuntime().exec(new String[]{&quot;adb&quot;,&quot;logcat&quot;,&quot;-d&quot;});
 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -592,36 +641,6 @@ return builder.toString();</expression-string>
         <custom-info>java.io.BufferedReader,java.io.InputStreamReader</custom-info>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>Process process = Runtime.getRuntime().exec(&quot;adb logcat -t '05-03 08:57:30.379' -d&quot;);
-BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-StringBuilder builder = new StringBuilder();
-String line = &quot;&quot;;
-int count =0;
-while (count &lt;10){
-    builder.append(reader.readLine()).append(&quot;\n&quot;);
-    count++;
-}
-return builder.toString();</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>java.io.BufferedReader,java.io.InputStreamReader</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Process process = Runtime.getRuntime().exec(&quot;adb logcat  -d&quot;);
-BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-StringBuilder builder = new StringBuilder();
-String line = &quot;&quot;;
-int count =0;
-while (count &lt;10){
-    builder.append(reader.readLine()).append(&quot;\n&quot;);
-    count++;
-}
-return builder.toString();</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>java.io.BufferedReader,java.io.InputStreamReader</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
@@ -657,13 +676,6 @@ return builder.toString();</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Format.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="21" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/LogLine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -671,43 +683,81 @@ return builder.toString();</expression-string>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/text/DateFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="365" column="73" lean-forward="true" selection-start-line="365" selection-start-column="73" selection-end-line="365" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Format.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Priority.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        <state relative-caret-position="135">
+          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Line.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding>
+            <element signature="e#259#260#0" expanded="true" />
+            <element signature="e#297#298#0" expanded="true" />
+            <element signature="e#329#330#0" expanded="true" />
+            <element signature="e#356#357#0" expanded="true" />
+            <element signature="e#382#383#0" expanded="true" />
+            <element signature="e#417#418#0" expanded="true" />
+            <element signature="e#447#448#0" expanded="true" />
+            <element signature="e#484#485#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#565#566#0" expanded="true" />
+            <element signature="e#605#606#0" expanded="true" />
+            <element signature="e#635#636#0" expanded="true" />
+            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#729#730#0" expanded="true" />
+            <element signature="e#767#768#0" expanded="true" />
+            <element signature="e#801#802#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#901#902#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/frunoman/Logger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="140" selection-start-line="140" selection-end-line="140" />
+        <state relative-caret-position="460">
+          <caret line="78" column="5" lean-forward="true" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#824#832#0" expanded="true" />
-            <element signature="e#537#538#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
-            <element signature="e#490#491#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
             <element signature="e#694#702#0" expanded="true" />
+            <element signature="e#1844#1850#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/github/frunoman/BaseTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="420">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
         </state>
       </provider>
     </entry>

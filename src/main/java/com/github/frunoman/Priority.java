@@ -1,13 +1,13 @@
 package com.github.frunoman;
 
 public enum Priority {
-    VERBOSE(":V"),
-    DEBUG(":D"),
-    INFO(":I"),
-    WARNING(":W"),
-    ERROR(":E"),
-    ASSERT(":A"),
-    SILENCE(":S");
+    VERBOSE("V"),
+    DEBUG("D"),
+    INFO("I"),
+    WARNING("W"),
+    ERROR("E"),
+    ASSERT("A"),
+    SILENCE("S");
 
     private final String value;
 
