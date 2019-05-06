@@ -15,6 +15,7 @@ public class Logger {
     private List<String> command;
     private StringBuilder formatList;
 
+
     public Logger(Logcat logcat) {
         this.formatList = new StringBuilder();
         this.udid = new ArrayList<String>();
@@ -114,6 +115,33 @@ public class Logger {
 
     public Logger bufferSize(){
         command.add("-g");
+        return this;
+    }
+
+    public Logger count(int count){
+        command.add("-m");
+        command.add(String.valueOf(count));
+        return this;
+    }
+
+    public Logger dividers(){
+        command.add("-D");
+        return this;
+    }
+
+    public Logger statistic(){
+        command.add("-S");
+        return this;
+    }
+
+    public Logger pid(int pid){
+        command.add("--pid="+pid);
+        return this;
+    }
+
+    public Logger buffer(Buffer buffer){
+        command.add("-b");
+        command.add(buffer.toString());
         return this;
     }
 
