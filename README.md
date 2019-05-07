@@ -1,7 +1,26 @@
 # LogcatAdvanced
-This library using to obtain Logcat logs from differnt platform (Windows, Unix, Android)
-Example:
-1.Create Logger instance:
+This library using to obtain Logcat logs from different platforms (Windows, Unix, Android)
+<h1>How to</h1>
+
+<p>1. Add the JitPack repository to your build file</p>
+  <h3>Maven</h3>
+      
+      <repositories>
+		    <repository>
+		      <id>jitpack.io</id>
+		      <url>https://jitpack.io</url>
+		   </repository>
+	   </repositories>
+  
+  <p>2. Add the dependency</p>
+  
+    <dependency>
+      <groupId>com.github.FruNoman</groupId>
+	    <artifactId>LogcatAdvanced</artifactId>
+	    <version>Tag</version>
+    </dependency>
+                        
+  <h2>1.Create Logger instance:</h2>
   For Android you shoud use empty constructor
   
      Logger logger = new Logger();
@@ -14,7 +33,7 @@ Example:
   
      Logger logger = new Logger("/path/to/adb","device udid") 
 
-2.After that you can customize your logger output:
+<h2>2.After that you can customize your logger output:</h2>
 
     logger
      .dump()                             // - Dump the log to the screen and exits.
@@ -29,7 +48,7 @@ Example:
      .clear()                            // - Clear (flush) the selected buffers and exit
      .count(20)                          // - Quit after printing <count> number of lines
   
-  3. Then you can read logs from your logger instance
+  <h2>3. Then you can read logs from your logger instance</h2>
   
     List<Logger.Line> logs = logger.readLineLogs(); // - Read logs like Line object instance
         for (Logger.Line log : logs) {
