@@ -6,19 +6,21 @@ import org.testng.annotations.Test;
 public class BaseTest {
 
     @Test(priority = 1)
-    public void dumpTest() throws Exception {
+    public void lineTest() throws Exception {
         Logger logger = new Logger("adb")
-                .buffer(Buffer.SYSTEM)
-                .buffer(Buffer.MAIN)
                 .dump();
-
-        for(Line log:logger.readLineLogs()){
-            System.out.println(log.getDate()+" "+ log.getPriority()+" pid "+ log.getPid()+" tag "+log.getTag()+" description: "+log.getDescription());
+        for (Logger.Line log : logger.readLineLogs()) {
+            System.out.println(log);
         }
+    }
 
-//            for(String log :logger.readLogs()){
-//                System.out.println(log);
-//            }
+    @Test(priority = 2)
+    public void stringTest() throws Exception {
+        Logger logger = new Logger("adb")
+                .dump();
+        for (String log : logger.readStringLogs()) {
+            System.out.println(log);
+        }
 
     }
 

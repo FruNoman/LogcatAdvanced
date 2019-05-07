@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,7 +45,7 @@ public class Logger {
     }
 
 
-    public List<String> readLogs() throws IOException {
+    public List<String> readStringLogs() throws IOException {
         command.add(formatList.toString());
         Process process = new ProcessBuilder().command(command).start();
         BufferedReader bufferedReader = new BufferedReader(
@@ -206,5 +205,63 @@ public class Logger {
         return tag;
     }
 
+    public class Line {
+        private Date date;
+        private int pid;
+        private Priority priority;
+        private String tag;
+        private String description;
+
+        public Date getDate() {
+            return date;
+        }
+
+        private void setDate(Date date) {
+            this.date = date;
+        }
+
+        public int getPid() {
+            return pid;
+        }
+
+        private void setPid(int pid) {
+            this.pid = pid;
+        }
+
+        public Priority getPriority() {
+            return priority;
+        }
+
+        private void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public String getTag() {
+            return tag;
+        }
+
+        private void setTag(String tag) {
+            this.tag = tag;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        private void setDescription(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return "Line{" +
+                    "date=" + date +
+                    ", pid=" + pid +
+                    ", priority=" + priority +
+                    ", tag='" + tag + '\'' +
+                    ", description='" + description + '\'' +
+                    '}';
+        }
+    }
 
 }
