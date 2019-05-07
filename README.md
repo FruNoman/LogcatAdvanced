@@ -7,18 +7,34 @@ This library using to obtain Logcat logs from different platforms (Windows, Unix
       
       	<repositories>
 	<repository>
-		<id>jitpack.io</id>
-		<url>https://jitpack.io</url>
+	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
 	</repository>
 	</repositories>
+	
+  <h3>Gradle</h3>
+  
+  	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
   
   <p>2. Add the dependency</p>
-  
-    <dependency>
-      	<groupId>com.github.FruNoman</groupId>
+    <h3>Maven</h3>
+    
+   	 <dependency>
+   	 <groupId>com.github.FruNoman</groupId>
 	<artifactId>LogcatAdvanced</artifactId>
 	<version>0.0.3</version>
-    </dependency>
+    	</dependency>
+	
+<h3>Gradle</h3>
+
+	dependencies {
+			implementation 'com.github.FruNoman:LogcatAdvanced:Tag'
+		}
                         
   <h2>1.Create Logger instance:</h2>
   For Android you shoud use empty constructor
