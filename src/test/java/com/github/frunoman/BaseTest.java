@@ -7,18 +7,18 @@ public class BaseTest {
 
     @Test(priority = 1)
     public void lineTest() throws Exception {
-        Logger logger = new Logger("adb")
+        Logcat logcat = new Logcat("adb")
                 .dump();
-        for (Logger.Line log : logger.readLineLogs()) {
+        for (Logcat.Line log : logcat.readLineLogs()) {
             System.out.println(log);
         }
     }
 
     @Test(priority = 2)
     public void stringTest() throws Exception {
-        Logger logger = new Logger("adb")
+        Logcat logcat = new Logcat("adb")
                 .dump();
-        for (String log : logger.readStringLogs()) {
+        for (String log : logcat.readStringLogs()) {
             System.out.println(log);
         }
 

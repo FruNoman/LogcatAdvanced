@@ -11,30 +11,30 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Logger {
+public class Logcat {
     private static final String TIME_FORMAT = "MM-dd HH:mm:ss.sss";
     private static final String priorityPattern = "\\s[A-Z]\\s";
-    private static final  String pidPattern = "\\s\\d{4,}\\s";
+    private static final String pidPattern = "\\s\\d{4,}\\s";
     private static final String tagPattern = "\\s[A-Z]\\s([a-zA-Z\\s\\w-.]*):";
     private static final String descriptionPattern = "\\s[A-Z]\\s([a-zA-Z\\s\\w-.]*):(.*)";
 
     private List<String> command;
     private StringBuilder formatList;
 
-    public Logger() {
+    public Logcat() {
         this.formatList = new StringBuilder();
         this.command = new ArrayList<String>();
         command.add("logcat");
     }
 
-    public Logger(String adb) {
+    public Logcat(String adb) {
         this.formatList = new StringBuilder();
         this.command = new ArrayList<String>();
         command.add(adb);
         command.add("logcat");
     }
 
-    public Logger(String adb, String udid) {
+    public Logcat(String adb, String udid) {
         this.formatList = new StringBuilder();
         this.command = new ArrayList<String>();
 
@@ -81,80 +81,80 @@ public class Logger {
         return logs;
     }
 
-    public Logger dump() {
+    public Logcat dump() {
         command.add("-d");
         return this;
     }
 
-    public Logger time(Date date) {
+    public Logcat time(Date date) {
         String data = new SimpleDateFormat(TIME_FORMAT).format(date);
         command.add("-t");
         command.add(data);
         return this;
     }
 
-    public Logger time(long time) {
+    public Logcat time(long time) {
         String data = new SimpleDateFormat(TIME_FORMAT).format(new Date(time));
         command.add("-t");
         command.add(data);
         return this;
     }
 
-    public Logger time(String time) {
+    public Logcat time(String time) {
         command.add("-t");
         command.add(time);
         return this;
     }
 
-    public Logger tag(String tag) {
+    public Logcat tag(String tag) {
         command.add(tag);
         command.add("*:" + Priority.SILENCE);
         return this;
     }
 
-    public Logger tag(String tag, Priority priority) {
+    public Logcat tag(String tag, Priority priority) {
         command.add(tag + ":" + priority);
         command.add("*:" + Priority.SILENCE);
         return this;
     }
 
-    public Logger clear() {
+    public Logcat clear() {
         command.add("--clear");
         return this;
     }
 
-    public Logger format(Format format) {
+    public Logcat format(Format format) {
         formatList.append("-v" + format.toString());
         return this;
     }
 
-    public Logger bufferSize() {
+    public Logcat bufferSize() {
         command.add("-g");
         return this;
     }
 
-    public Logger count(int count) {
+    public Logcat count(int count) {
         command.add("-m");
         command.add(String.valueOf(count));
         return this;
     }
 
-    public Logger dividers() {
+    public Logcat dividers() {
         command.add("-D");
         return this;
     }
 
-    public Logger statistic() {
+    public Logcat statistic() {
         command.add("-S");
         return this;
     }
 
-    public Logger pid(int pid) {
+    public Logcat pid(int pid) {
         command.add("--pid=" + pid);
         return this;
     }
 
-    public Logger buffer(Buffer buffer) {
+    public Logcat buffer(Buffer buffer) {
         command.add("-b");
         command.add(buffer.toString());
         return this;
@@ -175,7 +175,7 @@ public class Logger {
         return priority;
     }
 
-    private int findPid(String line){
+    private int findPid(String line) {
         int pid = 0;
         Pattern r = Pattern.compile(pidPattern);
         Matcher m = r.matcher(line);
@@ -185,7 +185,7 @@ public class Logger {
         return pid;
     }
 
-    private String findTag(String line){
+    private String findTag(String line) {
         String tag = null;
         Pattern r = Pattern.compile(tagPattern);
         Matcher m = r.matcher(line);
@@ -195,7 +195,7 @@ public class Logger {
         return tag;
     }
 
-    private String findDescription(String line){
+    private String findDescription(String line) {
         String tag = null;
         Pattern r = Pattern.compile(descriptionPattern);
         Matcher m = r.matcher(line);
