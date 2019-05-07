@@ -15,12 +15,11 @@ public class BaseTest {
         Logger logger = new Logger("adb")
                 .buffer(Buffer.SYSTEM)
                 .buffer(Buffer.MAIN)
-                .tag("WifiService")
                 .dump();
 
-//        for(Line log:logger.readLineLogs()){
-//            System.out.println(log.getDate()+" "+ log.getPriority()+" pid "+ log.getPid());
-//        }
+        for(Line log:logger.readLineLogs()){
+            System.out.println(log.getDate()+" "+ log.getPriority()+" pid "+ log.getPid()+" tag "+log.getTag());
+        }
 
 //            for(String log :logger.readLogs()){
 //                System.out.println(log);

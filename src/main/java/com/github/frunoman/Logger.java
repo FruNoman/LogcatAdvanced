@@ -16,6 +16,7 @@ public class Logger {
     private static final String TIME_FORMAT = "MM-dd HH:mm:ss.sss";
     private static final String priorityPattern = "\\s[A-Z]\\s";
     private static final  String pidPattern = "\\s\\d{4,}\\s";
+    private static final String tagPattern = "\\s[A-Z]\\s([a-zA-Z\\s\\w-.]*):";
 
     private List<String> command;
     private StringBuilder formatList;
@@ -69,6 +70,7 @@ public class Logger {
             Line logLine = new Line();
             logLine.setPid(findPid(line));
             logLine.setPriority(findPriority(line));
+            logLine.setTag(findTag(line));
             try {
                 logLine.setDate(format.parse(line));
             } catch (Exception e) {
@@ -180,6 +182,16 @@ public class Logger {
             pid = Integer.parseInt(m.group(0).trim());
         }
         return pid;
+    }
+
+    private String findTag(String line){
+        String tag = null;
+        Pattern r = Pattern.compile(tagPattern);
+        Matcher m = r.matcher(line);
+        if (m.find()) {
+            tag = (m.group(1).trim());
+        }
+        return tag;
     }
 
 
