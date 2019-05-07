@@ -5,19 +5,19 @@ This library using to obtain Logcat logs from different platforms (Windows, Unix
 <p>1. Add the JitPack repository to your build file</p>
   <h3>Maven</h3>
       
-      <repositories>
-		    <repository>
-		      <id>jitpack.io</id>
-		      <url>https://jitpack.io</url>
-		   </repository>
-	   </repositories>
+      	<repositories>
+	<repository>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+	</repositories>
   
   <p>2. Add the dependency</p>
   
     <dependency>
-      <groupId>com.github.FruNoman</groupId>
-	    <artifactId>LogcatAdvanced</artifactId>
-	    <version>Tag</version>
+      	<groupId>com.github.FruNoman</groupId>
+	<artifactId>LogcatAdvanced</artifactId>
+	<version>0.0.3</version>
     </dependency>
                         
   <h2>1.Create Logger instance:</h2>
