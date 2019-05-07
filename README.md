@@ -27,27 +27,27 @@ This library using to obtain Logcat logs from different platforms (Windows, Unix
    	 <dependency>
    	 <groupId>com.github.FruNoman</groupId>
 	<artifactId>LogcatAdvanced</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
     	</dependency>
 	
 <h3>Gradle</h3>
 
 	dependencies {
-			implementation 'com.github.FruNoman:LogcatAdvanced:Tag'
+			implementation 'com.github.FruNoman:LogcatAdvanced:0.0.4'
 		}
                         
   <h2>1.Create Logger instance:</h2>
   For Android you shoud use empty constructor
   
-     Logger logger = new Logger();
+     Logcat logger = new Logcat();
 
   For Windows\Unix systems you should set path to adb file
   
-     Logger logger = new Logger("/path/to/adb") 
+     Logcat logger = new Logcat("/path/to/adb") 
 
   If you have few connected devices you should set specific device udid
   
-     Logger logger = new Logger("/path/to/adb","device udid") 
+     Logcat logger = new Logcat("/path/to/adb","device udid") 
 
 <h2>2.After that you can customize your logger output:</h2>
 
@@ -66,7 +66,7 @@ This library using to obtain Logcat logs from different platforms (Windows, Unix
   
   <h2>3. Then you can read logs from your logger instance</h2>
   
-    List<Logger.Line> logs = logger.readLineLogs(); // - Read logs like Line object instance
+    List<Logcat.Line> logs = logger.readLineLogs(); // - Read logs like Line object instance
         for (Logger.Line log : logs) {
             log.getDate();                          // - Return line's time in java.util.Date instance
             log.getTag();                           // - Return line's tag in String class format
