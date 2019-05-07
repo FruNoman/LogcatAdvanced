@@ -17,6 +17,7 @@ public class Logger {
     private static final String priorityPattern = "\\s[A-Z]\\s";
     private static final  String pidPattern = "\\s\\d{4,}\\s";
     private static final String tagPattern = "\\s[A-Z]\\s([a-zA-Z\\s\\w-.]*):";
+    private static final String descriptionPattern = "\\s[A-Z]\\s([a-zA-Z\\s\\w-.]*):(.*)";
 
     private List<String> command;
     private StringBuilder formatList;
@@ -71,6 +72,7 @@ public class Logger {
             logLine.setPid(findPid(line));
             logLine.setPriority(findPriority(line));
             logLine.setTag(findTag(line));
+            logLine.setDescription(findDescription(line));
             try {
                 logLine.setDate(format.parse(line));
             } catch (Exception e) {
@@ -190,6 +192,16 @@ public class Logger {
         Matcher m = r.matcher(line);
         if (m.find()) {
             tag = (m.group(1).trim());
+        }
+        return tag;
+    }
+
+    private String findDescription(String line){
+        String tag = null;
+        Pattern r = Pattern.compile(descriptionPattern);
+        Matcher m = r.matcher(line);
+        if (m.find()) {
+            tag = (m.group(2));
         }
         return tag;
     }

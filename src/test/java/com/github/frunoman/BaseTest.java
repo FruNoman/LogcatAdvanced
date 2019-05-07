@@ -2,11 +2,6 @@ package com.github.frunoman;
 
 import org.testng.annotations.Test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class BaseTest {
 
@@ -18,7 +13,7 @@ public class BaseTest {
                 .dump();
 
         for(Line log:logger.readLineLogs()){
-            System.out.println(log.getDate()+" "+ log.getPriority()+" pid "+ log.getPid()+" tag "+log.getTag());
+            System.out.println(log.getDate()+" "+ log.getPriority()+" pid "+ log.getPid()+" tag "+log.getTag()+" description: "+log.getDescription());
         }
 
 //            for(String log :logger.readLogs()){
