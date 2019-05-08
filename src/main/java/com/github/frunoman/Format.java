@@ -8,7 +8,14 @@ public enum Format {
     TAG("tag"),
     THREAD("thread"),
     THREADTIME("threadtime"),
-    TIME("time");
+    TIME("time"),
+    COLOR("color"),
+    EPOCH("epoch"),
+    MONOTONIC("monotonic"),
+    USEC("usec"),
+    UTC("UTC"),
+    YEAR("year"),
+    ZONE("zone");
 
     private final String value;
 

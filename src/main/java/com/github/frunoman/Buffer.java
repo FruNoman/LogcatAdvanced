@@ -6,6 +6,8 @@ public enum Buffer {
     MAIN("main"),
     SYSTEM("system"),
     CRASH("crash"),
+    STATS("stats"),
+    KERNEL("kernel"),
     ALL("all"),
     DEFAULT("default");
 
