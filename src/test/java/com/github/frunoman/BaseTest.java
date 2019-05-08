@@ -2,6 +2,7 @@ package com.github.frunoman;
 
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -27,7 +28,7 @@ public class BaseTest {
 
 
     @Test(priority = 2)
-    public void bufferSizeTest() throws Exception {
+    public void bufferSizeTest() throws IOException {
         List<Logcat.Buffers> buffers = new Logcat("adb")
                 .buffer(Buffer.SYSTEM)
                 .buffer(Buffer.MAIN)

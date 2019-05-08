@@ -132,10 +132,9 @@ public class Logcat {
         return this;
     }
 
-    public List<Buffers> bufferSize() {
+    public List<Buffers> bufferSize() throws IOException {
         command.add("-g");
         List<Buffers> bufferList = new ArrayList<Buffers>();
-        try {
             Process process = new ProcessBuilder().command(command).start();
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(process.getInputStream()));
@@ -148,9 +147,7 @@ public class Logcat {
                 bufferList.add(buffer);
 
             }
-        } catch (Exception e) {
 
-        }
         return bufferList;
 
     }
