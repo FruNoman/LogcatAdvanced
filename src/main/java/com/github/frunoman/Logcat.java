@@ -108,13 +108,17 @@ public class Logcat {
 
     public Logcat tag(String tag) {
         command.add(tag);
-        command.add("*:" + Priority.SILENCE);
+        if(!tag.equals("*")) {
+            command.add("*:" + Priority.SILENCE);
+        }
         return this;
     }
 
     public Logcat tag(String tag, Priority priority) {
         command.add(tag + ":" + priority);
-        command.add("*:" + Priority.SILENCE);
+        if(!tag.equals("*")) {
+            command.add("*:" + Priority.SILENCE);
+        }
         return this;
     }
 
@@ -161,7 +165,7 @@ public class Logcat {
     }
 
     private Priority findPriority(String line) {
-        Priority priority = null;
+        Priority priority = Priority.UNKNOWN;
         Pattern r = Pattern.compile(priorityPattern);
         Matcher m = r.matcher(line);
         if (m.find()) {
@@ -186,7 +190,7 @@ public class Logcat {
     }
 
     private String findTag(String line) {
-        String tag = null;
+        String tag = "";
         Pattern r = Pattern.compile(tagPattern);
         Matcher m = r.matcher(line);
         if (m.find()) {
@@ -196,7 +200,7 @@ public class Logcat {
     }
 
     private String findDescription(String line) {
-        String tag = null;
+        String tag = "";
         Pattern r = Pattern.compile(descriptionPattern);
         Matcher m = r.matcher(line);
         if (m.find()) {

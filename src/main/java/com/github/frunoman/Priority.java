@@ -7,7 +7,9 @@ public enum Priority {
     WARNING("W"),
     ERROR("E"),
     ASSERT("A"),
-    SILENCE("S");
+    SILENCE("S"),
+    FATAL("F"),
+    UNKNOWN("Unknown");
 
     private final String value;
 
