@@ -6,9 +6,7 @@ import com.github.frunoman.enums.Priority;
 import com.github.frunoman.utils.Finder;
 import com.github.frunoman.utils.Utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -159,6 +157,31 @@ public class Logcat {
     public Logcat pid(int pid) {
         command.add("--pid=" + pid);
         return this;
+    }
+
+    public File file(String name) throws IOException {
+        File file = new File(name);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
+        BufferedReader bufferedReader = Utils.execute(command);
+        String line ="";
+        while ((line = bufferedReader.readLine())!=null){
+            writer.write(line);
+            writer.write("\n");
+        }
+        writer.close();
+        return file;
+    }
+
+    public File file(File file) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
+        BufferedReader bufferedReader = Utils.execute(command);
+        String line ="";
+        while ((line = bufferedReader.readLine())!=null){
+            writer.write(line);
+            writer.write("\n");
+        }
+        writer.close();
+        return file;
     }
 
     public Logcat buffer(Buffer buffer) {

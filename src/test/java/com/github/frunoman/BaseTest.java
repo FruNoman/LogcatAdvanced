@@ -5,6 +5,7 @@ import com.github.frunoman.enums.Priority;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,10 +15,9 @@ public class BaseTest {
     @Test(priority = 1)
     public void lineTest() throws Exception {
         Logcat logcat = new Logcat("adb")
-                .time("05-10 10:05:40.321")
                 .dump();
         for (Logcat.Line log : logcat.readLineLogs()) {
-            System.out.println(log);
+            System.out.println(log.getDescription());
         }
     }
 
@@ -38,8 +38,18 @@ public class BaseTest {
                 .bufferSize();
         for (Logcat.Buffers buf : buffers) {
             System.out.println(buf);
-            Assert.assertEquals(buf.getBuffer(),(Buffer.SYSTEM));
+            Assert.assertEquals(buf.getBuffer(), (Buffer.SYSTEM));
         }
+    }
+
+    @Test(priority = 4)
+    public void fileTest() throws IOException {
+        File logcat = new Logcat("adb")
+                .tag("LifecycleMonitor")
+                .dump()
+                .file("test.txt");
+        Assert.assertTrue(logcat.exists());
+        logcat.delete();
     }
 
 
