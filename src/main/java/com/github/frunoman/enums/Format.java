@@ -1,4 +1,4 @@
-package com.github.frunoman;
+package com.github.frunoman.enums;
 
 public enum Format {
     BRIEF("brief"),

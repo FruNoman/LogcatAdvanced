@@ -1,5 +1,11 @@
 package com.github.frunoman;
 
+import com.github.frunoman.enums.Buffer;
+import com.github.frunoman.enums.Format;
+import com.github.frunoman.enums.Priority;
+import com.github.frunoman.utils.Finder;
+import com.github.frunoman.utils.Utils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,38 +13,28 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class Logcat {
-    private static final String TIME_FORMAT = "MM-dd HH:mm:ss.sss";
-    private static final String priorityPattern = "\\s[A-Z]\\s";
-    private static final String pidPattern = "\\s\\d{4,}\\s";
-    private static final String tagPattern = "\\s[A-Z]\\s([a-zA-Z\\s\\w-.]*):";
-    private static final String descriptionPattern = "\\s[A-Z]\\s([a-zA-Z\\s\\w-.]*):(.*)";
-    private static final String bufferPattern = "([a-z]*):";
-    private static final String ringBufferPattern = "(ring buffer is )(\\d*\\w*)";
-    private static final String consumedBufferPattern = "([(])(\\d*\\w*)\\s";
-    public final static long KB = 1024;
-    public final static long MB = 1024 * KB;
+    private static final String TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
 
     private List<String> command;
 
     public Logcat() {
-        this.command = new ArrayList<String>();
+        this.command = new LinkedList<String>();
         command.add("logcat");
     }
 
     public Logcat(String adb) {
-        this.command = new ArrayList<String>();
+        this.command = new LinkedList<>();
         command.add(adb);
         command.add("logcat");
     }
 
     public Logcat(String adb, String udid) {
-        this.command = new ArrayList<String>();
-
+        this.command = new LinkedList<String>();
         command.add(adb);
         command.add("logcat");
         command.add("-s");
@@ -46,11 +42,10 @@ public class Logcat {
     }
 
 
-    public List<String> readStringLogs() throws IOException {
+    public LinkedList<String> readStringLogs() throws IOException {
         Process process = new ProcessBuilder().command(command).start();
-        BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(process.getInputStream()));
-        List<String> logs = new ArrayList<String>();
+        BufferedReader bufferedReader = Utils.execute(command);
+        LinkedList<String> logs = new LinkedList<String>();
         String line = "";
         while ((line = bufferedReader.readLine()) != null) {
             logs.add(line);
@@ -58,26 +53,38 @@ public class Logcat {
         return logs;
     }
 
-    public List<Line> readLineLogs() throws IOException {
-        DateFormat format = new SimpleDateFormat(TIME_FORMAT);
-        Process process = new ProcessBuilder().command(command).start();
-        BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(process.getInputStream()));
-        List<Line> logs = new ArrayList<Line>();
+    public LinkedList<Line> readLineLogs() throws IOException {
+        BufferedReader bufferedReader = Utils.execute(command);
+        LinkedList<Line> logs = new LinkedList<Line>();
         String line = "";
         while ((line = bufferedReader.readLine()) != null) {
             Line logLine = new Line();
-            logLine.setPid(findPid(line));
-            logLine.setPriority(findPriority(line));
-            logLine.setTag(findTag(line));
-            logLine.setDescription(findDescription(line));
+            logLine.setPid(Finder.findPid(line));
+            logLine.setPriority(Finder.findPriority(line));
+            logLine.setTag(Finder.findTag(line));
+            logLine.setDescription(Finder.findDescription(line));
             try {
-                logLine.setDate(format.parse(line));
+                logLine.setDate(Finder.findTime(line));
             } catch (Exception e) {
             }
             logs.add(logLine);
         }
         return logs;
+    }
+
+    public List<Buffers> bufferSize() throws IOException {
+        command.add("-g");
+        BufferedReader bufferedReader = Utils.execute(command);
+        List<Buffers> bufferList = new ArrayList<Buffers>();
+        String line = "";
+        while ((line = bufferedReader.readLine()) != null) {
+            Buffers buffer = new Buffers();
+            buffer.setBuffer(Finder.findBufferName(line));
+            buffer.setConsumed(Finder.findConsumedBufferSize(line));
+            buffer.setRingBuffer(Finder.findRingBufferSize(line));
+            bufferList.add(buffer);
+        }
+        return bufferList;
     }
 
     public Logcat dump() {
@@ -86,14 +93,14 @@ public class Logcat {
     }
 
     public Logcat time(Date date) {
-        String data = new SimpleDateFormat(TIME_FORMAT).format(date);
+        String data = Utils.formatDate(date, TIME_FORMAT);
         command.add("-t");
         command.add(data);
         return this;
     }
 
     public Logcat time(long time) {
-        String data = new SimpleDateFormat(TIME_FORMAT).format(new Date(time));
+        String data = Utils.formatDate(new Date(time), TIME_FORMAT);
         command.add("-t");
         command.add(data);
         return this;
@@ -132,25 +139,6 @@ public class Logcat {
         return this;
     }
 
-    public List<Buffers> bufferSize() throws IOException {
-        command.add("-g");
-        List<Buffers> bufferList = new ArrayList<Buffers>();
-            Process process = new ProcessBuilder().command(command).start();
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream()));
-            String line = "";
-            while ((line = bufferedReader.readLine()) != null) {
-                Buffers buffer = new Buffers();
-                buffer.setBuffer(findBufferName(line));
-                buffer.setConsumed(findConsumedBufferSize(line));
-                buffer.setRingBuffer(findRingBufferSize(line));
-                bufferList.add(buffer);
-
-            }
-
-        return bufferList;
-
-    }
 
     public Logcat count(int count) {
         command.add("-m");
@@ -179,99 +167,6 @@ public class Logcat {
         return this;
     }
 
-    private Priority findPriority(String line) {
-        Priority priority = Priority.UNKNOWN;
-        Pattern r = Pattern.compile(priorityPattern);
-        Matcher m = r.matcher(line);
-        if (m.find()) {
-            for (Priority prior : Priority.values()) {
-                if (prior.toString().equals(m.group(0).trim())) {
-                    priority = prior;
-                    break;
-                }
-            }
-        }
-        return priority;
-    }
-
-    private int findPid(String line) {
-        int pid = 0;
-        Pattern r = Pattern.compile(pidPattern);
-        Matcher m = r.matcher(line);
-        if (m.find()) {
-            pid = Integer.parseInt(m.group(0).trim());
-        }
-        return pid;
-    }
-
-    private String findTag(String line) {
-        String tag = "";
-        Pattern r = Pattern.compile(tagPattern);
-        Matcher m = r.matcher(line);
-        if (m.find()) {
-            tag = (m.group(1).trim());
-        }
-        return tag;
-    }
-
-    private String findDescription(String line) {
-        String description = "";
-        Pattern r = Pattern.compile(descriptionPattern);
-        Matcher m = r.matcher(line);
-        if (m.find()) {
-            description = (m.group(2));
-        }
-        return description;
-    }
-
-    private Buffer findBufferName(String line) {
-        Buffer buffer = null;
-        Pattern r = Pattern.compile(bufferPattern);
-        Matcher m = r.matcher(line);
-        if (m.find()) {
-            for (Buffer buf : Buffer.values()) {
-                if (buf.toString().equals(m.group(1).trim())) {
-                    buffer = buf;
-                    break;
-                }
-            }
-        }
-        return buffer;
-    }
-
-    private long findRingBufferSize(String line) {
-        long bufferSize = 0;
-        Pattern r = Pattern.compile(ringBufferPattern);
-        Matcher m = r.matcher(line);
-        if (m.find()) {
-           String size = m.group(2);
-            bufferSize = byteConverter(size);
-        }
-        return bufferSize;
-    }
-
-    private long findConsumedBufferSize(String line) {
-        long bufferSize = 0;
-        Pattern r = Pattern.compile(consumedBufferPattern);
-        Matcher m = r.matcher(line);
-        if (m.find()) {
-            String size = m.group(2);
-            bufferSize = byteConverter(size);
-        }
-        return bufferSize;
-    }
-
-    private long byteConverter(String line){
-        long bufferSize = 0;
-        if(line.contains("Mb")){
-            bufferSize = Long.parseLong(line.replace("Mb","").trim())*MB;
-        }else if(line.contains("Kb")){
-            bufferSize = Long.parseLong(line.replace("Kb","").trim())*KB;
-        }else if(line.contains("b")){
-            bufferSize = Long.parseLong(line.replace("b","").trim());
-        }
-        return bufferSize;
-    }
 
     public class Line {
         private Date date;
@@ -279,6 +174,9 @@ public class Logcat {
         private Priority priority;
         private String tag;
         private String description;
+
+        private Line() {
+        }
 
         public Date getDate() {
             return date;
@@ -322,21 +220,21 @@ public class Logcat {
 
         @Override
         public String toString() {
-            return "Line{" +
-                    "date=" + date +
-                    ", pid=" + pid +
-                    ", priority=" + priority +
-                    ", tag='" + tag + '\'' +
-                    ", description='" + description + '\'' +
-                    '}';
+            return Utils.formatDate(date, TIME_FORMAT)
+                    + " " + pid
+                    + " " + priority
+                    + " " + tag
+                    + ": " + description;
         }
     }
 
-    class Buffers {
+    public class Buffers {
         private Buffer buffer;
         private long ringBuffer;
         private long consumed;
 
+        private Buffers() {
+        }
 
         public Buffer getBuffer() {
             return buffer;
