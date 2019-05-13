@@ -27,13 +27,13 @@ This library using to obtain Logcat logs from different platforms (Windows, Unix
    	 <dependency>
    	 <groupId>com.github.FruNoman</groupId>
 	<artifactId>LogcatAdvanced</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.9</version>
     	</dependency>
 	
 <h3>Gradle</h3>
 
 	dependencies {
-			implementation 'com.github.FruNoman:LogcatAdvanced:0.0.4'
+			implementation 'com.github.FruNoman:LogcatAdvanced:0.0.9'
 		}
                         
   <h2>1.Create Logger instance:</h2>
@@ -63,21 +63,16 @@ This library using to obtain Logcat logs from different platforms (Windows, Unix
      .pid(2110)                          // - Only print logs from the given PID.
      .clear()                            // - Clear (flush) the selected buffers and exit
      .count(20)                          // - Quit after printing <count> number of lines
+     .build()				 // - Start collect logs
   
   <h2>3. Then you can read logs from your logger instance</h2>
   
-    List<Logcat.Line> logs = logger.readLineLogs(); // - Read logs like Line object instance
-        for (Logger.Line log : logs) {
+    Logcat.Line log = null; 
+        while ((log = logcat.readLine())!=null)
             log.getDate();                          // - Return line's time in java.util.Date instance
             log.getTag();                           // - Return line's tag in String class format
             log.getPriority();                      // - Return line's priority in Priority class format
             log.getPid();                           // - Return line's pid in Integer class format
             log.getDescription();                   // - Return line's description in String class format
         }
- Or you can use method which returning logs in typical logcat format:
- 
-    List<String> logs = logger=readStringLogs();
-    for(String log:logs){
-        System.out.println(log);
-    }
       
