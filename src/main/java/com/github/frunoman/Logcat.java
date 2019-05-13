@@ -13,59 +13,33 @@ import java.util.*;
 public class Logcat {
     private static final String TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
     private List<String> command;
-    private List<Line> lines;
     private BufferedReader reader;
 
 
     public Logcat() {
         this.command = new LinkedList<String>();
-        this.lines = new ArrayList<>();
         command.add("logcat");
     }
 
     public Logcat(String adb) {
         this.command = new LinkedList<>();
         command.add(adb);
+        command.add("shell");
         command.add("logcat");
     }
 
     public Logcat(String adb, String udid) {
         this.command = new LinkedList<String>();
         command.add(adb);
-        command.add("logcat");
         command.add("-s");
         command.add(udid);
+        command.add("shell");
+        command.add("logcat");
     }
 
-    public Logcat build() throws IOException {
+    public Logger build() throws IOException {
         reader = Utils.execute(command);
-        return this;
-    }
-
-    public Line readLine() throws IOException {
-        String line = "";
-        Line logLine = null;
-        if(((line = reader.readLine()) != null)) {
-                logLine = new Line();
-                if(!line.contains("----")) {
-                    logLine.setPid(Finder.findPid(line));
-                    logLine.setPriority(Finder.findPriority(line));
-                    logLine.setTag(Finder.findTag(line));
-                    logLine.setDescription(Finder.findDescription(line));
-                    try {
-                        logLine.setDate(Finder.findTime(line));
-                    } catch (Exception e) {
-                    }
-                }else {
-                    logLine.setDescription(line.split("---------")[1]);
-                    logLine.setPriority(Priority.UNKNOWN);
-                    logLine.setTag(" --------- ");
-                    logLine.setPid(0);
-                }
-
-
-        }
-        return logLine;
+        return new Logger();
     }
 
     public List<Buffers> bufferSize() throws IOException {
@@ -154,6 +128,33 @@ public class Logcat {
 
     public Logcat pid(int pid) {
         command.add("--pid=" + pid);
+        return this;
+    }
+
+    public Logcat pid(String processName) {
+        command.add("--pid=$(pidof -s "+processName+")");
+        return this;
+    }
+
+    public Logcat regex(String expr){
+        command.add("--regex="+expr);
+        return this;
+    }
+
+    public Logcat tail(int number){
+        command.add("-T");
+        command.add(String.valueOf(number));
+        return this;
+    }
+
+    public Logcat prune(){
+        command.add("--prune");
+        return this;
+    }
+
+    public Logcat prune(String blacklist){
+        command.add("-P");
+        command.add(blacklist);
         return this;
     }
 
@@ -286,6 +287,36 @@ public class Logcat {
             return buffer +
                     ": ring buffer is " + ringBuffer +
                     " bytes (" + consumed + " bytes consumed)";
+        }
+    }
+
+    public class Logger{
+        public Line readLine() throws IOException {
+            String line = "";
+            Line logLine = null;
+            if(((line = reader.readLine()) != null)) {
+                logLine = new Line();
+                if(!line.contains("----")) {
+                    logLine.setPid(Finder.findPid(line));
+                    logLine.setPriority(Finder.findPriority(line));
+                    logLine.setTag(Finder.findTag(line));
+                    logLine.setDescription(Finder.findDescription(line));
+                    try {
+                        logLine.setDate(Finder.findTime(line));
+                    } catch (Exception e) {
+                    }
+                }else {
+                    logLine.setDescription(line.split("---------")[1]);
+                    logLine.setPriority(Priority.UNKNOWN);
+                    logLine.setTag(" --------- ");
+                    logLine.setPid(0);
+                }
+            }
+            return logLine;
+        }
+
+        public String readString() throws IOException {
+            return reader.readLine();
         }
     }
 

@@ -1,7 +1,7 @@
 package com.github.frunoman;
 
 import com.github.frunoman.enums.Buffer;
-import com.github.frunoman.enums.Priority;
+import com.github.frunoman.enums.Format;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,25 +14,27 @@ public class BaseTest {
 
     @Test(priority = 1)
     public void lineTest() throws Exception {
-        Logcat logcat = new Logcat("adb")
-                .count(4)
+        Logcat.Logger logcat = new Logcat("adb")
+                .pid("com.android.car")
                 .dump()
-                .pid(2577)
                 .build();
         Logcat.Line line = null;
         while ((line = logcat.readLine())!=null){
             System.out.println(line);
         }
-
     }
 
     @Test(priority = 2)
     public void stringTest() throws Exception {
-        Logcat logcat = new Logcat("adb")
-                .dump();
-
+        Logcat.Logger logcat = new Logcat("adb")
+                .format(Format.PROCESS)
+                .dump()
+                .build();
+        String line = "";
+        while ((line = logcat.readString())!=null){
+            System.out.println(line);
+        }
     }
-
 
     @Test(priority = 3)
     public void bufferSizeTest() throws IOException {
@@ -45,13 +47,38 @@ public class BaseTest {
         }
     }
 
+
     @Test(priority = 4)
+    public void regexTest() throws IOException {
+        Logcat.Logger logcat = new Logcat("adb")
+                .dump()
+                .regex("uid")
+                .tail(20)
+                .build();
+        Logcat.Line line = null;
+        while ((line = logcat.readLine())!=null){
+            System.out.println(line);
+        }
+
+    }
+
+    @Test(priority = 5)
     public void fileTest() throws IOException {
         File logcat = new Logcat("adb")
                 .dump()
                 .file("fucking.txt");
         Assert.assertTrue(logcat.exists());
-//        logcat.delete();
+        logcat.delete();
+    }
+
+    @Test(priority = 5)
+    public void pruneTest() throws IOException {
+        Logcat.Logger logcat = new Logcat("adb")
+                .prune().build();
+        String line = "";
+        while ((line = logcat.readString())!=null){
+            System.out.println(line);
+        }
     }
 
 }
