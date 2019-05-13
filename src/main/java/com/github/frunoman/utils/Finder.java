@@ -19,13 +19,17 @@ public class Finder {
     private static final String consumedBufferPattern = "([(])(\\d*\\w*)\\s";
     private static final String timePattern = "(\\d*)-(\\d*)\\s(\\d*):(\\d*):(\\d*).(\\d*)";
 
-    public static Date findTime(String line) throws ParseException {
+    public static Date findTime(String line)  {
         Date time = null;
-        Pattern r = Pattern.compile(timePattern);
-        Matcher m = r.matcher(line);
-        if (m.find()) {
-            String data  = m.group();
-            time = Utils.stringFormatToDate(TIME_FORMAT,data);
+        try {
+            Pattern r = Pattern.compile(timePattern);
+            Matcher m = r.matcher(line);
+            if (m.find()) {
+                String data = m.group();
+                time = Utils.stringFormatToDate(TIME_FORMAT, data);
+            }
+        }catch (Exception e){
+
         }
         return time;
     }

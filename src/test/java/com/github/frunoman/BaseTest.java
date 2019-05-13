@@ -15,19 +15,22 @@ public class BaseTest {
     @Test(priority = 1)
     public void lineTest() throws Exception {
         Logcat logcat = new Logcat("adb")
-                .dump();
-        for (Logcat.Line log : logcat.readLineLogs()) {
-            System.out.println(log.getDescription());
+                .count(4)
+                .dump()
+                .pid(2577)
+                .build();
+        Logcat.Line line = null;
+        while ((line = logcat.readLine())!=null){
+            System.out.println(line);
         }
+
     }
 
     @Test(priority = 2)
     public void stringTest() throws Exception {
         Logcat logcat = new Logcat("adb")
                 .dump();
-        for (String log : logcat.readStringLogs()) {
-            System.out.println(log);
-        }
+
     }
 
 
@@ -45,12 +48,10 @@ public class BaseTest {
     @Test(priority = 4)
     public void fileTest() throws IOException {
         File logcat = new Logcat("adb")
-                .tag("LifecycleMonitor")
                 .dump()
-                .file("test.txt");
+                .file("fucking.txt");
         Assert.assertTrue(logcat.exists());
-        logcat.delete();
+//        logcat.delete();
     }
-
 
 }

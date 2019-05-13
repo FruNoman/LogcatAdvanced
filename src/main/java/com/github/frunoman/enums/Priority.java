@@ -9,7 +9,7 @@ public enum Priority {
     ASSERT("A"),
     SILENCE("S"),
     FATAL("F"),
-    UNKNOWN("Unknown");
+    UNKNOWN("---------");
 
     private final String value;
 

@@ -7,21 +7,19 @@ import com.github.frunoman.utils.Finder;
 import com.github.frunoman.utils.Utils;
 
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class Logcat {
     private static final String TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
-
     private List<String> command;
+    private List<Line> lines;
+    private BufferedReader reader;
+
 
     public Logcat() {
         this.command = new LinkedList<String>();
+        this.lines = new ArrayList<>();
         command.add("logcat");
     }
 
@@ -39,35 +37,35 @@ public class Logcat {
         command.add(udid);
     }
 
-
-    public LinkedList<String> readStringLogs() throws IOException {
-        Process process = new ProcessBuilder().command(command).start();
-        BufferedReader bufferedReader = Utils.execute(command);
-        LinkedList<String> logs = new LinkedList<String>();
-        String line = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            logs.add(line);
-        }
-        return logs;
+    public Logcat build() throws IOException {
+        reader = Utils.execute(command);
+        return this;
     }
 
-    public LinkedList<Line> readLineLogs() throws IOException {
-        BufferedReader bufferedReader = Utils.execute(command);
-        LinkedList<Line> logs = new LinkedList<Line>();
+    public Line readLine() throws IOException {
         String line = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            Line logLine = new Line();
-            logLine.setPid(Finder.findPid(line));
-            logLine.setPriority(Finder.findPriority(line));
-            logLine.setTag(Finder.findTag(line));
-            logLine.setDescription(Finder.findDescription(line));
-            try {
-                logLine.setDate(Finder.findTime(line));
-            } catch (Exception e) {
-            }
-            logs.add(logLine);
+        Line logLine = null;
+        if(((line = reader.readLine()) != null)) {
+                logLine = new Line();
+                if(!line.contains("----")) {
+                    logLine.setPid(Finder.findPid(line));
+                    logLine.setPriority(Finder.findPriority(line));
+                    logLine.setTag(Finder.findTag(line));
+                    logLine.setDescription(Finder.findDescription(line));
+                    try {
+                        logLine.setDate(Finder.findTime(line));
+                    } catch (Exception e) {
+                    }
+                }else {
+                    logLine.setDescription(line.split("---------")[1]);
+                    logLine.setPriority(Priority.UNKNOWN);
+                    logLine.setTag(" --------- ");
+                    logLine.setPid(0);
+                }
+
+
         }
-        return logs;
+        return logLine;
     }
 
     public List<Buffers> bufferSize() throws IOException {
