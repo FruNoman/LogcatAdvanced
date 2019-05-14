@@ -1,4 +1,4 @@
-package com.github.frunoman.enums;
+package com.github.frunoman.logcat.enums;
 
 public enum Buffer {
     RADIO("radio"),

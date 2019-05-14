@@ -1,4 +1,4 @@
-package com.github.frunoman.utils;
+package com.github.frunoman.logcat.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,5 +45,13 @@ public class Utils {
         BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(process.getInputStream()));
         return bufferedReader;
+    }
+
+    public static boolean isAndroid(){
+        boolean android = false;
+        if(System.getProperty("java.vm.name").equalsIgnoreCase("Dalvik")) {
+            android = true;
+        }
+        return android;
     }
 }

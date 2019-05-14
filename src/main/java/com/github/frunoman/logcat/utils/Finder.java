@@ -1,15 +1,16 @@
-package com.github.frunoman.utils;
+package com.github.frunoman.logcat.utils;
 
-import com.github.frunoman.enums.Buffer;
-import com.github.frunoman.enums.Priority;
+import com.github.frunoman.logcat.enums.Buffer;
+import com.github.frunoman.logcat.enums.Priority;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Finder {
     private static final String TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
+
+    // -Standart logcat output
     private static final String priorityPattern = "\\s[A-Z]\\s";
     private static final String pidPattern = "\\s\\d{4,}\\s";
     private static final String tagPattern = "\\s[A-Z]\\s([a-zA-Z\\s\\w-.]*):";
@@ -18,6 +19,8 @@ public class Finder {
     private static final String ringBufferPattern = "(ring buffer is )(\\d*\\w*)";
     private static final String consumedBufferPattern = "([(])(\\d*\\w*)\\s";
     private static final String timePattern = "(\\d*)-(\\d*)\\s(\\d*):(\\d*):(\\d*).(\\d*)";
+
+    // TODO: Create patterns for all formats
 
     public static Date findTime(String line)  {
         Date time = null;

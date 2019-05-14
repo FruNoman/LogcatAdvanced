@@ -1,10 +1,11 @@
-package com.github.frunoman;
+package com.github.frunoman.logcat;
 
-import com.github.frunoman.enums.Buffer;
-import com.github.frunoman.enums.Format;
-import com.github.frunoman.enums.Priority;
-import com.github.frunoman.utils.Finder;
-import com.github.frunoman.utils.Utils;
+import com.github.frunoman.logcat.android.AndroidDevice;
+import com.github.frunoman.logcat.enums.Buffer;
+import com.github.frunoman.logcat.enums.Format;
+import com.github.frunoman.logcat.enums.Priority;
+import com.github.frunoman.logcat.utils.Finder;
+import com.github.frunoman.logcat.utils.Utils;
 
 import java.io.*;
 import java.util.*;
@@ -37,8 +38,12 @@ public class Logcat {
         command.add("logcat");
     }
 
-    public Logger build() throws IOException {
-        reader = Utils.execute(command);
+    public Logger build() throws Exception {
+        if (Utils.isAndroid()) {
+            reader = AndroidDevice.executeAndroidRootShell(command);
+        } else {
+            reader = Utils.execute(command);
+        }
         return new Logger();
     }
 
@@ -306,7 +311,7 @@ public class Logcat {
                     } catch (Exception e) {
                     }
                 }else {
-                    logLine.setDescription(line.split("---------")[1]);
+                    logLine.setDescription(line.split("----")[1]);
                     logLine.setPriority(Priority.UNKNOWN);
                     logLine.setTag(" --------- ");
                     logLine.setPid(0);
