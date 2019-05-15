@@ -2,6 +2,7 @@ package com.github.frunoman.logcat;
 
 import com.github.frunoman.logcat.enums.Buffer;
 import com.github.frunoman.logcat.enums.Format;
+import com.github.frunoman.logcat.enums.Priority;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,6 +16,8 @@ public class BaseTest {
     @Test(priority = 1)
     public void lineTest() throws Exception {
         Logcat.Logger logcat = new Logcat("adb")
+                .time("05-15 13:37:31.587")
+                .pid("system_server")
                 .dump()
                 .build();
         Logcat.Line line = null;
@@ -50,6 +53,7 @@ public class BaseTest {
     @Test(priority = 4)
     public void regexTest() throws Exception {
         Logcat.Logger logcat = new Logcat("adb")
+                .tag("*", Priority.ERROR)
                 .dump()
                 .build();
         Logcat.Line line = null;
@@ -60,12 +64,13 @@ public class BaseTest {
     }
 
     @Test(priority = 5)
-    public void fileTest() throws IOException {
+    public void fileTest() throws Exception {
         File logcat = new Logcat("adb")
+                .pid("system_server")
                 .dump()
                 .file("fucking.txt");
         Assert.assertTrue(logcat.exists());
-        logcat.delete();
+
     }
 
     @Test(priority = 5)

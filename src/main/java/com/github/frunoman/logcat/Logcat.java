@@ -12,21 +12,27 @@ import java.util.*;
 
 
 public class Logcat {
-    private static final String TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
+    private static final String EXIT_TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
+    private static final String TIME_FORMAT = "MM-ddHH:mm:ss.SSS";
     private List<String> command;
+    private List<String> baseCommand;
     private BufferedReader reader;
 
 
     public Logcat() {
         this.command = new LinkedList<String>();
+        baseCommand = new ArrayList<>(command);
         command.add("logcat");
+
     }
 
     public Logcat(String adb) {
         this.command = new LinkedList<>();
         command.add(adb);
         command.add("shell");
+        baseCommand = new ArrayList<>(command);
         command.add("logcat");
+
     }
 
     public Logcat(String adb, String udid) {
@@ -35,6 +41,7 @@ public class Logcat {
         command.add("-s");
         command.add(udid);
         command.add("shell");
+        baseCommand = new ArrayList<>(command);
         command.add("logcat");
     }
 
@@ -83,7 +90,7 @@ public class Logcat {
 
     public Logcat time(String time) {
         command.add("-t");
-        command.add(time);
+        command.add(time.replace(" ",""));
         return this;
     }
 
@@ -136,8 +143,18 @@ public class Logcat {
         return this;
     }
 
-    public Logcat pid(String processName) {
-        command.add("--pid=$(pidof -s "+processName+")");
+    public Logcat pid(String processName) throws Exception {
+        baseCommand.add("pidof");
+        baseCommand.add("-s");
+        baseCommand.add(processName);
+        BufferedReader reader = null;
+        if(Utils.isAndroid()){
+            reader = AndroidDevice.executeAndroidRootShell(baseCommand);
+        }else {
+            reader = Utils.execute(baseCommand);
+        }
+        String pid = reader.readLine();
+        command.add("--pid="+pid);
         return this;
     }
 
@@ -247,7 +264,7 @@ public class Logcat {
 
         @Override
         public String toString() {
-            return Utils.formatDate(date, TIME_FORMAT)
+            return Utils.formatDate(date, EXIT_TIME_FORMAT)
                     + " " + pid
                     + " " + priority
                     + " " + tag
