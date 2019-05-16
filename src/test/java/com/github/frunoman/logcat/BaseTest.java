@@ -24,7 +24,7 @@ public class BaseTest {
         while ((line = logger.readLine()) != null) {
             System.out.println(line);
         }
-    
+
         logger =logcat
                         .tag("*", Priority.ERROR)
                         .time("05-16 11:01:49.064")
