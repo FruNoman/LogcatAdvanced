@@ -3,12 +3,13 @@ package com.github.frunoman.logcat.utils;
 import com.github.frunoman.logcat.enums.Buffer;
 import com.github.frunoman.logcat.enums.Priority;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Finder {
-    private static final String TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
+    private static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
 
     // -Standart logcat output
     private static final String priorityPattern = "\\s[A-Z]\\s";
@@ -25,12 +26,8 @@ public class Finder {
     public static Date findTime(String line)  {
         Date time = null;
         try {
-            Pattern r = Pattern.compile(timePattern);
-            Matcher m = r.matcher(line);
-            if (m.find()) {
-                String data = m.group();
-                time = Utils.stringFormatToDate(TIME_FORMAT, data);
-            }
+            SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT);
+            time = dateFormat.parse(line);
         }catch (Exception e){
 
         }

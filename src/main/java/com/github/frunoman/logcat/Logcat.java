@@ -12,17 +12,20 @@ import java.util.*;
 
 
 public class Logcat {
-    private static final String EXIT_TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
-    private static final String TIME_FORMAT = "MM-ddHH:mm:ss.SSS";
+    private static final String TIME_FORMAT = "MM-dd HH:mm:ss.SSS";
+    private static final String YEAR_TIME_FORMAT = "YYYY-MM-ddHH:mm:ss.SSS";
+
     private List<String> command;
     private List<String> baseCommand;
     private BufferedReader reader;
-
+    private Format currentFormat = Format.DEFAULT;
 
     public Logcat() {
         this.command = new LinkedList<String>();
         baseCommand = new ArrayList<>(command);
         command.add("logcat");
+        command.add("-v");
+        command.add(Format.YEAR.toString());
 
     }
 
@@ -32,6 +35,8 @@ public class Logcat {
         command.add("shell");
         baseCommand = new ArrayList<>(command);
         command.add("logcat");
+        command.add("-v");
+        command.add(Format.YEAR.toString());
 
     }
 
@@ -43,6 +48,8 @@ public class Logcat {
         command.add("shell");
         baseCommand = new ArrayList<>(command);
         command.add("logcat");
+        command.add("-v");
+        command.add(Format.YEAR.toString());
     }
 
     public Logger build() throws Exception {
@@ -77,20 +84,20 @@ public class Logcat {
     public Logcat time(Date date) {
         String data = Utils.formatDate(date, TIME_FORMAT);
         command.add("-t");
-        command.add(data);
+        command.add(data.replace(" ", ""));
         return this;
     }
 
     public Logcat time(long time) {
         String data = Utils.formatDate(new Date(time), TIME_FORMAT);
         command.add("-t");
-        command.add(data);
+        command.add(data.replace(" ", ""));
         return this;
     }
 
     public Logcat time(String time) {
         command.add("-t");
-        command.add(time.replace(" ",""));
+        command.add(time.replace(" ", ""));
         return this;
     }
 
@@ -116,8 +123,7 @@ public class Logcat {
     }
 
     public Logcat format(Format format) {
-        command.add("-v");
-        command.add(format.toString());
+        currentFormat = format;
         return this;
     }
 
@@ -148,33 +154,33 @@ public class Logcat {
         baseCommand.add("-s");
         baseCommand.add(processName);
         BufferedReader reader = null;
-        if(Utils.isAndroid()){
+        if (Utils.isAndroid()) {
             reader = AndroidDevice.executeAndroidRootShell(baseCommand);
-        }else {
+        } else {
             reader = Utils.execute(baseCommand);
         }
         String pid = reader.readLine();
-        command.add("--pid="+pid);
+        command.add("--pid=" + pid);
         return this;
     }
 
-    public Logcat regex(String expr){
-        command.add("--regex="+expr);
+    public Logcat regex(String expr) {
+        command.add("--regex=" + expr);
         return this;
     }
 
-    public Logcat tail(int number){
+    public Logcat tail(int number) {
         command.add("-T");
         command.add(String.valueOf(number));
         return this;
     }
 
-    public Logcat prune(){
+    public Logcat prune() {
         command.add("--prune");
         return this;
     }
 
-    public Logcat prune(String blacklist){
+    public Logcat prune(String blacklist) {
         command.add("-P");
         command.add(blacklist);
         return this;
@@ -182,22 +188,14 @@ public class Logcat {
 
     public File file(String name) throws IOException {
         File file = new File(name);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
-        BufferedReader bufferedReader = Utils.execute(command);
-        String line ="";
-        while ((line = bufferedReader.readLine())!=null){
-            writer.write(line);
-            writer.write("\n");
-        }
-        writer.close();
-        return file;
+        return file(file);
     }
 
     public File file(File file) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file,true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
         BufferedReader bufferedReader = Utils.execute(command);
-        String line ="";
-        while ((line = bufferedReader.readLine())!=null){
+        String line = "";
+        while ((line = bufferedReader.readLine()) != null) {
             writer.write(line);
             writer.write("\n");
         }
@@ -218,8 +216,10 @@ public class Logcat {
         private Priority priority;
         private String tag;
         private String description;
+        private Format currentFormat;
 
-        private Line() {
+        private Line(Format format) {
+            this.currentFormat = format;
         }
 
         public Date getDate() {
@@ -262,13 +262,43 @@ public class Logcat {
             this.description = description;
         }
 
+        private String getFormatOutput(Format format) {
+            String output = "";
+            switch (format) {
+                case BRIEF:
+                    output = String.format("%s/%s( %d): %s", priority, tag, pid, description);
+                    break;
+                case LONG:
+                    output = String.format("[ %s %d: %s/%s]\n %s\n", Utils.formatDate(date, TIME_FORMAT), pid, priority, tag, description);
+                    break;
+                case PROCESS:
+                    output = String.format("%s( %d) %s (%s)", priority, pid, description, tag);
+                    break;
+                case RAW:
+                    output = String.format("%s", description);
+                    break;
+                case TAG:
+                    output = String.format("%s/%s: %s", priority, tag, description);
+                    break;
+                case THREAD:
+                    output = String.format("%s( %d:) %s", priority, pid, description);
+                    break;
+                case TIME:
+                    output = String.format("%s %s/%s( %d): %s", Utils.formatDate(date, TIME_FORMAT), priority, tag, pid, description);
+                    break;
+                case YEAR:
+                    output = String.format("%s %s/%s( %d): %s", Utils.formatDate(date, YEAR_TIME_FORMAT), priority, tag, pid, description);
+                    break;
+                default:
+                    output = String.format("%s %d %s %s: %s", Utils.formatDate(date, TIME_FORMAT), pid, priority, tag, description);
+                    break;
+            }
+            return output;
+        }
+
         @Override
         public String toString() {
-            return Utils.formatDate(date, EXIT_TIME_FORMAT)
-                    + " " + pid
-                    + " " + priority
-                    + " " + tag
-                    + ": " + description;
+            return getFormatOutput(currentFormat);
         }
     }
 
@@ -312,13 +342,13 @@ public class Logcat {
         }
     }
 
-    public class Logger{
+    public class Logger {
         public Line readLine() throws IOException {
             String line = "";
             Line logLine = null;
-            if(((line = reader.readLine()) != null)) {
-                logLine = new Line();
-                if(!line.contains("----")) {
+            if (((line = reader.readLine()) != null)) {
+                logLine = new Line(currentFormat);
+                if (!line.contains("----")) {
                     logLine.setPid(Finder.findPid(line));
                     logLine.setPriority(Finder.findPriority(line));
                     logLine.setTag(Finder.findTag(line));
@@ -327,8 +357,8 @@ public class Logcat {
                         logLine.setDate(Finder.findTime(line));
                     } catch (Exception e) {
                     }
-                }else {
-                    logLine.setDescription(line.split("----")[1]);
+                } else {
+                    logLine.setDescription(line);
                     logLine.setPriority(Priority.UNKNOWN);
                     logLine.setTag(" --------- ");
                     logLine.setPid(0);

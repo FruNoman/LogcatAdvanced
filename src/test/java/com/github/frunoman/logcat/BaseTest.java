@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,12 +17,11 @@ public class BaseTest {
     @Test(priority = 1)
     public void lineTest() throws Exception {
         Logcat.Logger logcat = new Logcat("adb")
-                .time("05-15 13:37:31.587")
-                .pid("system_server")
+                .regex("device")
                 .dump()
                 .build();
         Logcat.Line line = null;
-        while ((line = logcat.readLine())!=null){
+        while ((line = logcat.readLine()) != null) {
             System.out.println(line);
         }
     }
@@ -33,7 +33,7 @@ public class BaseTest {
                 .dump()
                 .build();
         String line = "";
-        while ((line = logcat.readString())!=null){
+        while ((line = logcat.readString()) != null) {
             System.out.println(line);
         }
     }
@@ -57,7 +57,7 @@ public class BaseTest {
                 .dump()
                 .build();
         Logcat.Line line = null;
-        while ((line = logcat.readLine())!=null){
+        while ((line = logcat.readLine()) != null) {
             System.out.println(line);
         }
 
@@ -78,7 +78,7 @@ public class BaseTest {
         Logcat.Logger logcat = new Logcat("adb")
                 .prune().build();
         String line = "";
-        while ((line = logcat.readString())!=null){
+        while ((line = logcat.readString()) != null) {
             System.out.println(line);
         }
     }

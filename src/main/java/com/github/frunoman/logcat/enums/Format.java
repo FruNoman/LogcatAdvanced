@@ -9,13 +9,11 @@ public enum Format {
     THREAD("thread"),
     THREADTIME("threadtime"),
     TIME("time"),
-    COLOR("color"),
     EPOCH("epoch"),
     MONOTONIC("monotonic"),
-    USEC("usec"),
-    UTC("UTC"),
     YEAR("year"),
-    ZONE("zone");
+    ZONE("zone"),
+    DEFAULT("");
 
     private final String value;
 
