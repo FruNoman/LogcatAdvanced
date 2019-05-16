@@ -17,15 +17,17 @@ public class Logcat {
 
     private List<String> command;
     private List<String> baseCommand;
+    private List<String> flashCommand;
     private BufferedReader reader;
     private Format currentFormat = Format.DEFAULT;
 
     public Logcat() {
         this.command = new LinkedList<String>();
-        baseCommand = new ArrayList<>(command);
+        this.baseCommand = new ArrayList<>(command);
         command.add("logcat");
         command.add("-v");
         command.add(Format.YEAR.toString());
+        this.flashCommand = new ArrayList<>(command);
 
     }
 
@@ -37,6 +39,7 @@ public class Logcat {
         command.add("logcat");
         command.add("-v");
         command.add(Format.YEAR.toString());
+        this.flashCommand = new ArrayList<>(command);
 
     }
 
@@ -50,6 +53,7 @@ public class Logcat {
         command.add("logcat");
         command.add("-v");
         command.add(Format.YEAR.toString());
+        this.flashCommand = new ArrayList<>(command);
     }
 
     public Logger build() throws Exception {
@@ -58,6 +62,7 @@ public class Logcat {
         } else {
             reader = Utils.execute(command);
         }
+        command = flashCommand;
         return new Logger();
     }
 

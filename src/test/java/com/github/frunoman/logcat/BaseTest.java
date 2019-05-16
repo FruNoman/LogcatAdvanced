@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 
@@ -16,12 +15,23 @@ public class BaseTest {
 
     @Test(priority = 1)
     public void lineTest() throws Exception {
-        Logcat.Logger logcat = new Logcat("adb")
-                .regex("device")
-                .dump()
-                .build();
+        Logcat logcat = new Logcat("adb");
+        Logcat.Logger logger =
+                logcat.regex("device")
+                        .dump()
+                        .build();
         Logcat.Line line = null;
-        while ((line = logcat.readLine()) != null) {
+        while ((line = logger.readLine()) != null) {
+            System.out.println(line);
+        }
+    
+        logger =logcat
+                        .tag("*", Priority.ERROR)
+                        .time("05-16 11:01:49.064")
+                        .dump()
+                        .build();
+
+        while ((line = logger.readLine()) != null) {
             System.out.println(line);
         }
     }
